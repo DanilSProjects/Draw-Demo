@@ -51,13 +51,16 @@ class Canvas: UIView {
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var cView: UIView!
+    
     let canvas = Canvas()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        view.addSubview(cView)
         view.addSubview(canvas)
         canvas.backgroundColor = .white
-        canvas.frame = view.frame
+        canvas.frame = cView.frame
     }
 
 

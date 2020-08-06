@@ -15,9 +15,12 @@ class Canvas: UIView {
         
         //set colour
         //context.setStrokeColor(UIColor.red.cgColor)
+        context.setStrokeColor(strokeColour)
         
         // set width
         // context.setLineWidth(10)
+        context.setLineWidth(CGFloat(lineWidth))
+
         
         lines.forEach {(line) in
             for (i, p) in line.enumerated() {
@@ -32,6 +35,8 @@ class Canvas: UIView {
         context.strokePath()
     }
     var lines = [[CGPoint]]()
+    var lineWidth: Float = 6.0
+    var strokeColour = UIColor.black.cgColor
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         lines.append([CGPoint]())
@@ -63,6 +68,30 @@ class ViewController: UIViewController {
         canvas.frame = cView.frame
     }
 
+    @IBAction func coloursIsChanged(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            // black selected
+            canvas.strokeColour = UIColor.black.cgColor
+        case 1:
+            // red selected
+            canvas.strokeColour = UIColor.red.cgColor
+        case 2:
+            // green selected
+            canvas.strokeColour = UIColor.green.cgColor
+        case 3:
+            // yellow selected
+            canvas.strokeColour = UIColor.yellow.cgColor
+        default:
+            // default colour [black] shouldn't fire
+            canvas.strokeColour = UIColor.black.cgColor
+        }
+    }
 
+    @IBAction func sliderMoved(_ sender: UISlider) {
+        // line width changes to slider value
+        canvas.lineWidth = sender.value
+    }
+    
 }
 
